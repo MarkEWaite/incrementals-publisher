@@ -69,7 +69,11 @@ pipeline {
 
     stage('Release') {
       steps {
-        buildDockerAndPublishImage('incrementals-publisher', [targetplatforms: 'linux/amd64,linux/arm64', disablePublication: !infra.isInfra()])
+        buildDockerAndPublishImage('incrementals-publisher', [
+          publishToPrivateAzureRegistry: true,
+          targetplatforms: 'linux/arm64', 
+          disablePublication: !infra.isInfra(),
+        ])
       }
     }
   }
